@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  postgresdb:
+    image: postgres
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - POSTGRES_USER=$POSTGRESDB_USER
+      - POSTGRES_PASSWORD=$POSTGRESDB_ROOT_PASSWORD
+      - POSTGRES_DB=$POSTGRESDB_DATABASE
+    ports:
+      - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
+    volumes:
+      - db:/var/lib/postgres
+  MtlGisxPoc:
+    image: mtl_gisc_poc:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+    restart: on-failure
+    environment:
+      - APP_NAME=mtl_gisc_poc
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresdb:$POSTGRESDB_DOCKER_PORT/mtl_gisx_poc_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=passw0rd
+    volumes:
+      - ./data:/data
+    depends_on:
+      - postgresdb
+
+#    depends_on:
+#      postgresdb:
+#        condition: service_healthy
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U postgres -d mtl_gisc_poc" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+volumes:
+  db:
