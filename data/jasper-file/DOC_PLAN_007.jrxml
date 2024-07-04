@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DOC_PLAN_007" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="50" uuid="08548e8d-f55f-4a0f-8674-33c9493f4ff0">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mtl-GISX-POC_DataAdapter.jrdax"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="HEADER" mode="Opaque" backcolor="#FFCCFF" fontName="TH SarabunPSK" fontSize="10" isBold="true">
+		<pen lineWidth="0.5" lineColor="#FF0099"/>
+		<box>
+			<topPen lineWidth="1.0" lineColor="#FF0099"/>
+			<leftPen lineWidth="1.0" lineColor="#FF0099"/>
+			<bottomPen lineWidth="1.0" lineColor="#FF0099"/>
+			<rightPen lineWidth="1.0" lineColor="#FF0099"/>
+		</box>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[WITH ranked_plans AS (
+    SELECT
+        policy_no,
+        seq_no_plan_code,
+        seq_no_benefit_condition,
+        plan_benefit,
+        plan_num,
+        group_plan,
+        plan_desc,
+        benefit_condition_desc,
+        plan_benefit_amount,
+        ROW_NUMBER() OVER () AS rn
+    FROM gisx_report_tmp
+),
+grouped_plans AS (
+    SELECT
+        rn,
+        policy_no,
+        plan_benefit,
+        plan_num,
+        group_plan,
+        seq_no_plan_code,
+        seq_no_benefit_condition,
+        plan_desc,
+        benefit_condition_desc,
+        plan_benefit_amount,
+        CEIL(plan_num / 5.0) AS grp,
+        plan_num % 5 AS pos
+    FROM ranked_plans
+)
+SELECT
+    policy_no,
+    group_plan,
+    plan_desc,
+    benefit_condition_desc,
+    seq_no_plan_code,
+    seq_no_benefit_condition,
+    grp,
+    MAX(CASE WHEN pos = 1 THEN plan_benefit_amount END) AS "col_amount_1",
+    MAX(CASE WHEN pos = 2 THEN plan_benefit_amount END) AS "col_amount_2",
+    MAX(CASE WHEN pos = 3 THEN plan_benefit_amount END) AS "col_amount_3",
+    MAX(CASE WHEN pos = 4 THEN plan_benefit_amount END) AS "col_amount_4",
+    MAX(CASE WHEN pos = 0 THEN plan_benefit_amount END) AS "col_amount_5",
+    MAX(CASE WHEN pos = 1 THEN plan_benefit END) AS "col_plan_1",
+    MAX(CASE WHEN pos = 2 THEN plan_benefit END) AS "col_plan_2",
+    MAX(CASE WHEN pos = 3 THEN plan_benefit END) AS "col_plan_3",
+    MAX(CASE WHEN pos = 4 THEN plan_benefit END) AS "col_plan_4",
+    MAX(CASE WHEN pos = 0 THEN plan_benefit END) AS "col_plan_5"
+FROM grouped_plans
+where policy_no = '44446666'
+GROUP BY policy_no,group_plan,seq_no_plan_code,seq_no_benefit_condition,plan_desc,benefit_condition_desc,grp
+ORDER BY policy_no,group_plan,seq_no_plan_code,seq_no_benefit_condition,plan_desc,benefit_condition_desc,grp;]]>
+	</queryString>
+	<field name="policy_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="policy_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="policy_no"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="group_plan" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="group_plan"/>
+		<property name="com.jaspersoft.studio.field.label" value="group_plan"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="plan_desc" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="plan_desc"/>
+		<property name="com.jaspersoft.studio.field.label" value="plan_desc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="benefit_condition_desc" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="benefit_condition_desc"/>
+		<property name="com.jaspersoft.studio.field.label" value="benefit_condition_desc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="seq_no_plan_code" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="seq_no_plan_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="seq_no_plan_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="seq_no_benefit_condition" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="seq_no_benefit_condition"/>
+		<property name="com.jaspersoft.studio.field.label" value="seq_no_benefit_condition"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="grp" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="grp"/>
+		<property name="com.jaspersoft.studio.field.label" value="grp"/>
+	</field>
+	<field name="col_amount_1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="col_amount_1"/>
+		<property name="com.jaspersoft.studio.field.label" value="col_amount_1"/>
+	</field>
+	<field name="col_amount_2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="col_amount_2"/>
+		<property name="com.jaspersoft.studio.field.label" value="col_amount_2"/>
+	</field>
+	<field name="col_amount_3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="col_amount_3"/>
+		<property name="com.jaspersoft.studio.field.label" value="col_amount_3"/>
+	</field>
+	<field name="col_amount_4" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="col_amount_4"/>
+		<property name="com.jaspersoft.studio.field.label" value="col_amount_4"/>
+	</field>
+	<field name="col_amount_5" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="col_amount_5"/>
+		<property name="com.jaspersoft.studio.field.label" value="col_amount_5"/>
+	</field>
+	<field name="col_plan_1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="col_plan_1"/>
+		<property name="com.jaspersoft.studio.field.label" value="col_plan_1"/>
+	</field>
+	<field name="col_plan_2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="col_plan_2"/>
+		<property name="com.jaspersoft.studio.field.label" value="col_plan_2"/>
+	</field>
+	<field name="col_plan_3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="col_plan_3"/>
+		<property name="com.jaspersoft.studio.field.label" value="col_plan_3"/>
+	</field>
+	<field name="col_plan_4" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="col_plan_4"/>
+		<property name="com.jaspersoft.studio.field.label" value="col_plan_4"/>
+	</field>
+	<field name="col_plan_5" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="col_plan_5"/>
+		<property name="com.jaspersoft.studio.field.label" value="col_plan_5"/>
+	</field>
+	<variable name="INITIAL" class="java.lang.String" resetType="Group" resetGroup="Group_seq_no_plan_code" incrementType="Group" incrementGroup="Group_seq_no_plan_code">
+		<variableExpression><![CDATA[$F{seq_no_benefit_condition}+""]]></variableExpression>
+		<initialValueExpression><![CDATA["xx"]]></initialValueExpression>
+	</variable>
+	<variable name="previousValue" class="java.lang.String" resetType="Group" resetGroup="Group_seq_no_plan_code" incrementType="Group" incrementGroup="Group_seq_no_plan_code">
+		<variableExpression><![CDATA[$V{INITIAL}]]></variableExpression>
+	</variable>
+	<group name="policy_no">
+		<groupExpression><![CDATA[$F{policy_no}]]></groupExpression>
+	</group>
+	<group name="group_plan" isStartNewPage="true" isReprintHeaderOnEachPage="true" keepTogether="true">
+		<groupExpression><![CDATA[$F{group_plan}]]></groupExpression>
+		<groupHeader>
+			<band height="140">
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<frame>
+					<reportElement stretchType="ContainerHeight" x="355" y="107" width="200" height="16" uuid="079c7910-9732-431e-a53f-dbb449b99db9">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FF0099"/>
+					</box>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement style="HEADER" stretchType="ContainerHeight" x="0" y="-1" width="40" height="17" isPrintWhenDetailOverflows="true" uuid="d9b4eebb-6e35-4f38-8551-d457d0707f77">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_1})]]></printWhenExpression>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font fontName="TH SarabunPSK"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{col_plan_1}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement style="HEADER" stretchType="ContainerHeight" x="40" y="-1" width="40" height="17" isPrintWhenDetailOverflows="true" uuid="a519c059-67ce-4923-acf0-f7d2bbec5d17">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_2})]]></printWhenExpression>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font fontName="TH SarabunPSK"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{col_plan_2}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement style="HEADER" stretchType="ContainerHeight" x="80" y="-1" width="40" height="17" isPrintWhenDetailOverflows="true" uuid="2a790f84-a456-4dd2-a24e-35de8667b5ed">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_3})]]></printWhenExpression>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font fontName="TH SarabunPSK"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{col_plan_3}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement style="HEADER" stretchType="ContainerHeight" x="120" y="-1" width="40" height="17" isPrintWhenDetailOverflows="true" printWhenGroupChanges="Group_seq_no_plan_code" uuid="32d26ff8-d359-4796-bf34-f671cc0f052c">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_4})]]></printWhenExpression>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font fontName="TH SarabunPSK"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{col_plan_4}]]></textFieldExpression>
+					</textField>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement style="HEADER" stretchType="ContainerHeight" x="160" y="-1" width="40" height="17" isPrintWhenDetailOverflows="true" uuid="61de7b5c-1691-4e5c-89ac-17e4322eef00">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_5})]]></printWhenExpression>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font fontName="TH SarabunPSK"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{col_plan_5}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<staticText>
+					<reportElement style="HEADER" x="130" y="90" width="225" height="33" uuid="f949631b-3730-4ca7-a26e-0813c785b825">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<text><![CDATA[ผลประโยชน์และเงื่อไขความคุ้มครอง]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="HEADER" x="0" y="90" width="130" height="33" uuid="5439712e-ac55-447c-bbc7-4e5688f35126">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<text><![CDATA[ความคุ้มครอง]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="123" width="355" height="17" uuid="22810b0f-d0c0-4f05-9751-eef7d9ef4517">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+						<font fontName="TH SarabunPSK" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[หลักเกณฑ์การแบ่งแผน]]></text>
+				</staticText>
+				<textField textAdjust="ScaleFont">
+					<reportElement mode="Opaque" x="355" y="123" width="40" height="17" uuid="e925002f-5c0f-40c6-b030-a78848d903c6">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="ScaleFont">
+					<reportElement mode="Opaque" x="395" y="123" width="40" height="17" uuid="9500151d-4a50-41d1-8bf8-03e7423c7cc9">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="ScaleFont">
+					<reportElement mode="Opaque" x="435" y="123" width="40" height="17" uuid="657e98dd-d5e2-4f07-9203-2b98ea863bfb">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="ScaleFont">
+					<reportElement mode="Opaque" x="475" y="123" width="40" height="17" uuid="24d6deaf-7d5e-4026-b8c6-b2f9f3a92d6f">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_4})]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="ScaleFont">
+					<reportElement mode="Opaque" x="515" y="123" width="40" height="17" uuid="154b8254-61fb-47be-bbfe-7b2b3be6909e">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_5})]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="555" height="20" uuid="b4e70bd5-849f-4fa4-9a6e-a77a844931f1">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="TH SarabunPSK" size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[เอกสารแนบตารางกรมธรรม์]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="20" width="555" height="20" uuid="451d5fc3-2c86-4eed-beea-b44be5223c70">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="TH SarabunPSK" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["เป็นส่วนหนึ่งของกรมธรรม์ประกันชีวิตกลุ่มแบบชั่วระยะเวลา เลขที่ "+($F{policy_no})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="40" width="555" height="20" uuid="0b40a175-6870-43f8-b1da-3c6f37a7a687">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="TH SarabunPSK" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ผู้ถือกรมธรรม์ บริษัท xxxxx"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="60" width="555" height="20" uuid="f04043f5-36a9-4cf7-921b-6f12097dbea5">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="TH SarabunPSK" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["วันที่มีผลบังคับ วันที่ 1 ตุลาคม 2561"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="80" width="555" height="10" uuid="76fa93bd-4cf3-43ec-aa7c-bfdaea54e069">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="HEADER" x="355" y="90" width="200" height="17" uuid="10b91ee2-fbb5-49b1-ba56-6691fd7c7c4b">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_5})]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<text><![CDATA[จำนวนเงินเอาประกันภัย (บาท)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="HEADER" x="355" y="90" width="160" height="17" uuid="1e5b34c9-09d3-434c-876d-8ebb6e065dad">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_4}) && !VsmUtil.isNotEmpty($F{col_plan_5})]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<text><![CDATA[จำนวนเงินเอาประกันภัย (บาท)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="HEADER" x="355" y="90" width="120" height="17" uuid="9eded6fd-634c-4f9d-b8f6-0d52c973e7b1">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_3}) && !VsmUtil.isNotEmpty($F{col_plan_4}) && !VsmUtil.isNotEmpty($F{col_plan_5})]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<text><![CDATA[จำนวนเงินเอาประกันภัย (บาท)]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="1">
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<printWhenExpression><![CDATA[$V{PAGE_NUMBER}.intValue() == 1]]></printWhenExpression>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Group_seq_no_plan_code">
+		<groupExpression><![CDATA[$F{seq_no_plan_code}]]></groupExpression>
+		<groupHeader>
+			<band>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="1">
+				<line>
+					<reportElement x="0" y="0" width="555" height="1" uuid="ae86fab8-1e1c-4f03-bc42-6450272f4a4c">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_5})]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FF0099"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="0" width="515" height="1" uuid="b74b0ee2-6c79-429f-a636-942ba98dbad2">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_4})]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FF0099"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="0" width="475" height="1" uuid="eab49e3e-aaf8-4172-9cde-e90722ce0f9a">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_amount_3})]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FF0099"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="0" width="435" height="1" uuid="6559cb22-045d-4131-a506-e37c45c8767b">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_amount_2})]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FF0099"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="0" width="395" height="1" uuid="d07b4f78-9757-4ae1-997e-400556767b69">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_amount_2})]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FF0099"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Group_bene_condition_des" keepTogether="true">
+		<groupExpression><![CDATA[$F{benefit_condition_desc}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement stretchType="ContainerHeight" x="355" y="0" width="200" height="15" uuid="9ec37f6e-fb66-47f3-bbef-0cc2cd529a6f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ContainerHeight" x="0" y="0" width="40" height="15" isPrintWhenDetailOverflows="true" uuid="7e5003c6-3242-4fa8-beac-2307772fba68">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_1})]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{col_amount_1}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ContainerHeight" x="40" y="0" width="40" height="15" isPrintWhenDetailOverflows="true" uuid="385afe6a-6f5a-418b-8791-e1096f310232">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_2})]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{col_amount_2}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ContainerHeight" x="80" y="0" width="40" height="15" isPrintWhenDetailOverflows="true" uuid="6fc50cf8-a1d8-408f-9771-9b3ffff64b30">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_3})]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{col_amount_3}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ContainerHeight" x="120" y="0" width="40" height="15" isPrintWhenDetailOverflows="true" uuid="ca7d82e0-b610-4ca6-8eb1-77a051925337">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_4})]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{col_amount_4}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ContainerHeight" x="160" y="0" width="40" height="15" isPrintWhenDetailOverflows="true" uuid="e9d5ff42-92e4-474f-9c26-ad0ea2cfde17">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_5})]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font fontName="TH SarabunPSK"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{col_amount_5}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement stretchType="ContainerHeight" x="0" y="0" width="355" height="15" uuid="bebf048e-4c5c-4ac6-a45e-95111c748e75">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ContainerHeight" x="130" y="0" width="225" height="15" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="35949bff-9080-4cc3-9536-834871d012e0">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.5" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.5" lineColor="#FF0099"/>
+					</box>
+					<textElement verticalAlignment="Top" markup="html">
+						<font fontName="TH SarabunPSK"/>
+						<paragraph lineSpacing="Fixed" lineSpacingSize="13.0" leftIndent="5" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[VsmUtil.wordwrap($F{benefit_condition_desc},80)]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ContainerHeight" x="30" y="0" width="100" height="15" isPrintWhenDetailOverflows="true" uuid="06e77fdf-8390-4f10-b9d6-0095a3fdcf5c">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.5" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.0" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.5" lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font fontName="TH SarabunPSK" isBold="true"/>
+						<paragraph leftIndent="5" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{Group_seq_no_plan_code_COUNT} == 1 ? VsmUtil.wordwrap($F{plan_desc},30) : ""]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ContainerHeight" x="0" y="0" width="30" height="15" isPrintWhenDetailOverflows="true" uuid="ca7e368c-d17b-4c1f-8454-1d8a2655e862">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineColor="#FF0099"/>
+						<leftPen lineWidth="0.5" lineColor="#FF0099"/>
+						<bottomPen lineWidth="0.0" lineColor="#FF0099"/>
+						<rightPen lineWidth="0.5" lineColor="#FF0099"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font fontName="TH SarabunPSK" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{Group_seq_no_plan_code_COUNT} == 1 ? $F{seq_no_plan_code} : ""]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="1" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$V{COLUMN_COUNT} > 30]]></printWhenExpression>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="54905247-033e-47a7-86d5-afde470e4f3d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_5})]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#FF0099"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="515" height="1" uuid="354544fa-538c-4e4c-badb-a27160c1879e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_plan_4})]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#FF0099"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="475" height="1" uuid="52c230f1-6576-46ba-8588-2257988425a9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_amount_3})]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#FF0099"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="435" height="1" uuid="7e176c2f-99a9-4198-ba00-e8c46e9836aa">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_amount_2})]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#FF0099"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="395" height="1" uuid="58477a3d-1351-4cf8-9d2a-b777a8ea569a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[VsmUtil.isNotEmpty($F{col_amount_2})]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#FF0099"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

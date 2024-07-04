@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DOC_PLAN_004" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1673b1e7-47d6-42e7-ac5e-54e360eec20f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mtl-GISX-POC_DataAdapter.jrdax"/>
+	<style name="Crosstab_CH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Crosstab_CG" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Crosstab_CT" mode="Opaque" backcolor="#005FB3">
+		<box>
+			<pen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Crosstab_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.0" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="MTL_DETAIL" pattern="" fontName="TH SarabunPSK" fontSize="10">
+		<box>
+			<topPen lineWidth="0.0" lineColor="#FF0099"/>
+			<leftPen lineWidth="0.0" lineColor="#FF0099"/>
+			<bottomPen lineWidth="0.5" lineColor="#FF0099"/>
+			<rightPen lineWidth="0.0" lineColor="#FF0099"/>
+		</box>
+	</style>
+	<style name="BG_HEADER" mode="Opaque" backcolor="#FFCCFF" radius="0" fontName="TH SarabunPSK" fontSize="10">
+		<pen lineColor="#FF66FF"/>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[select * from gisx_report_tmp t]]>
+	</queryString>
+	<field name="key_no" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="key_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="key_no"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="policy_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="policy_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="policy_no"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="plan_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="plan_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="plan_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="seq_no_plan_code" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="seq_no_plan_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="seq_no_plan_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="plan_desc" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="plan_desc"/>
+		<property name="com.jaspersoft.studio.field.label" value="plan_desc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="seq_no_benefit_condition" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="seq_no_benefit_condition"/>
+		<property name="com.jaspersoft.studio.field.label" value="seq_no_benefit_condition"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="benefit_condition_desc" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="benefit_condition_desc"/>
+		<property name="com.jaspersoft.studio.field.label" value="benefit_condition_desc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="plan_benefit" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="plan_benefit"/>
+		<property name="com.jaspersoft.studio.field.label" value="plan_benefit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="plan_benefit_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="plan_benefit_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="plan_benefit_amount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="reserve1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="reserve1"/>
+		<property name="com.jaspersoft.studio.field.label" value="reserve1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="reserve2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="reserve2"/>
+		<property name="com.jaspersoft.studio.field.label" value="reserve2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="reserve3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="reserve3"/>
+		<property name="com.jaspersoft.studio.field.label" value="reserve3"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="status_flag" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="status_flag"/>
+		<property name="com.jaspersoft.studio.field.label" value="status_flag"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="create_by" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="create_by"/>
+		<property name="com.jaspersoft.studio.field.label" value="create_by"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<field name="create_date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="create_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="create_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gisx_report_tmp"/>
+	</field>
+	<group name="Group_policy" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{policy_no}]]></groupExpression>
+		<groupHeader>
+			<band height="100">
+				<staticText>
+					<reportElement x="0" y="0" width="560" height="20" uuid="e4aff82a-312f-4219-8cbf-b9f8013fdc2d">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="TH SarabunPSK" size="16"/>
+					</textElement>
+					<text><![CDATA[เอกสารแนบตารางกรมธรรม์]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="20" width="560" height="20" uuid="80b02235-e2d6-4b38-979f-7772fb18c853">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="TH SarabunPSK" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["เป็นส่วนหนึ่งของกรมธรรม์ประกันชีวิตกลุ่มแบบชั่วระยะเวลา เลขที่ "+($F{policy_no})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="40" width="560" height="20" uuid="f46e6bde-d8a1-4c18-af95-a562346216f3">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="TH SarabunPSK" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ผู้ถือกรมธรรม์ บริษัท xxxxx"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="60" width="560" height="20" uuid="5f8ad8be-13bf-4bd5-b2d0-bd2d7ebda622">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="TH SarabunPSK" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["วันที่มีผลบังคับ วันที่ 1 ตุลาคม 2561"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="80" width="560" height="20" uuid="5bd4b022-ee76-4ded-913b-e5009dd4f8b5">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="250">
+				<crosstab columnBreakOffset="500">
+					<reportElement x="0" y="0" width="560" height="250" uuid="15d75e7a-3659-450d-b5bb-e3578780609e">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						<property name="com.jaspersoft.studio.crosstab.style.header" value="Crosstab_CH"/>
+						<property name="com.jaspersoft.studio.crosstab.style.group" value="Crosstab_CG"/>
+						<property name="com.jaspersoft.studio.crosstab.style.total" value="Crosstab_CT"/>
+						<property name="com.jaspersoft.studio.crosstab.style.detail" value="Crosstab_CD"/>
+					</reportElement>
+					<crosstabHeaderCell>
+						<cellContents style="BG_HEADER">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5" lineColor="#FF0099"/>
+								<leftPen lineColor="#FF0099"/>
+								<bottomPen lineWidth="0.75" lineColor="#FF0099"/>
+							</box>
+							<staticText>
+								<reportElement x="101" y="1" width="258" height="40" uuid="4e9d02fe-0128-4d2d-a3b1-510444e60c1c">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="TH SarabunPSK"/>
+								</textElement>
+								<text><![CDATA[ผลประโยชน์และเงื่อไขความคุ้มครอง]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="0" y="0" width="100" height="40" uuid="1376ee3c-4f0f-4f0b-9162-54ec8dee485a">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								</reportElement>
+								<box>
+									<rightPen lineWidth="0.5" lineColor="#FF0099"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="TH SarabunPSK"/>
+								</textElement>
+								<text><![CDATA[ความคุ้มครอง]]></text>
+							</staticText>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="40" width="360" height="20" uuid="c2fe9522-c239-4d78-bd30-f9c3960fe5e2">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+								</reportElement>
+								<box>
+									<topPen lineWidth="0.5" lineColor="#FF0099"/>
+									<leftPen lineWidth="0.5" lineColor="#FF0099"/>
+									<bottomPen lineWidth="0.0" lineColor="#FF0099"/>
+									<rightPen lineWidth="0.5" lineColor="#FF0099"/>
+								</box>
+								<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+									<font fontName="TH SarabunPSK"/>
+									<paragraph leftIndent="5"/>
+								</textElement>
+								<text><![CDATA[หลักเกณฑ์การแบ่งแผน]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabHeaderCell>
+					<rowGroup name="seq_no_plan_code" width="20" totalPosition="End">
+						<bucket class="java.lang.Integer">
+							<bucketExpression><![CDATA[$F{seq_no_plan_code}]]></bucketExpression>
+						</bucket>
+						<crosstabRowHeader>
+							<cellContents mode="Opaque" style="Crosstab_CD">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.0" lineColor="#FF0099"/>
+									<leftPen lineColor="#FF0099"/>
+									<bottomPen lineWidth="0.0" lineColor="#FF0099"/>
+									<rightPen lineColor="#FF0099"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="20" height="20" uuid="27d228a2-0ab2-4bfc-9e0b-a04f1822231b"/>
+									<textElement textAlignment="Center" verticalAlignment="Top">
+										<font fontName="TH SarabunPSK" size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{seq_no_plan_code}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="20" height="21" uuid="55158c80-eb82-4175-ad0a-500adef0d5a2">
+										<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									</reportElement>
+									<box>
+										<pen lineWidth="0.5"/>
+										<topPen lineColor="#FF0099"/>
+										<leftPen lineWidth="0.0"/>
+										<bottomPen lineWidth="0.0" lineColor="#FF0099"/>
+										<rightPen lineWidth="0.0"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Top">
+										<font fontName="TH SarabunPSK" size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</cellContents>
+						</crosstabRowHeader>
+						<crosstabTotalRowHeader>
+							<cellContents mode="Opaque" style="Crosstab_CD">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+								<box>
+									<bottomPen lineWidth="0.0" lineColor="#FF0099"/>
+								</box>
+								<line>
+									<reportElement x="0" y="0" width="20" height="1" uuid="0ffb3692-8c97-43d9-9891-cd7b5b8636bc">
+										<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									</reportElement>
+									<graphicElement>
+										<pen lineWidth="0.5" lineColor="#FF0099"/>
+									</graphicElement>
+								</line>
+							</cellContents>
+						</crosstabTotalRowHeader>
+					</rowGroup>
+					<rowGroup name="plan_desc" width="80" totalPosition="End">
+						<bucket class="java.lang.String">
+							<bucketExpression><![CDATA[$F{plan_desc}]]></bucketExpression>
+						</bucket>
+						<crosstabRowHeader>
+							<cellContents mode="Opaque" style="Crosstab_CD">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.0" lineColor="#FF0099"/>
+									<leftPen lineColor="#FF0099"/>
+									<rightPen lineColor="#FF0099"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="80" height="20" uuid="f1846060-91e9-4bcb-b2a1-b1dfe8ef6e0d"/>
+									<textElement textAlignment="Center">
+										<font fontName="TH SarabunPSK" size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{plan_desc}]]></textFieldExpression>
+								</textField>
+							</cellContents>
+						</crosstabRowHeader>
+						<crosstabTotalRowHeader>
+							<cellContents mode="Opaque" style="Crosstab_CG">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.0" lineColor="#FF0099"/>
+									<bottomPen lineWidth="0.0" lineColor="#FF0099"/>
+								</box>
+								<line>
+									<reportElement x="0" y="0" width="340" height="1" uuid="b640343e-e7e6-4131-9f40-1c466022cc4e">
+										<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									</reportElement>
+									<graphicElement>
+										<pen lineWidth="0.5" lineColor="#FF0099"/>
+									</graphicElement>
+								</line>
+							</cellContents>
+						</crosstabTotalRowHeader>
+					</rowGroup>
+					<rowGroup name="seq_no_benefit_condition" width="0" totalPosition="End">
+						<bucket class="java.lang.String">
+							<bucketExpression><![CDATA[""]]></bucketExpression>
+						</bucket>
+						<crosstabRowHeader>
+							<cellContents mode="Opaque" style="Crosstab_CH">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.0" lineColor="#FF0099"/>
+									<leftPen lineColor="#FF0099"/>
+									<rightPen lineColor="#FF0099"/>
+								</box>
+							</cellContents>
+						</crosstabRowHeader>
+						<crosstabTotalRowHeader>
+							<cellContents mode="Opaque" style="Crosstab_CG">
+								<box>
+									<topPen lineWidth="0.0" lineColor="#FF0099"/>
+								</box>
+							</cellContents>
+						</crosstabTotalRowHeader>
+					</rowGroup>
+					<rowGroup name="benefit_condition_desc" width="260" totalPosition="End">
+						<bucket class="java.lang.String">
+							<bucketExpression><![CDATA[$F{benefit_condition_desc}]]></bucketExpression>
+						</bucket>
+						<crosstabRowHeader>
+							<cellContents mode="Opaque" style="Crosstab_CD">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.0" lineColor="#FF0099"/>
+									<leftPen lineColor="#FF0099"/>
+									<rightPen lineColor="#FF0099"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="260" height="20" uuid="08434282-a890-449b-9ab6-9778b26320c5"/>
+									<box>
+										<topPen lineWidth="0.0" lineColor="#FF0099"/>
+									</box>
+									<textElement>
+										<font fontName="TH SarabunPSK" size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{benefit_condition_desc}]]></textFieldExpression>
+								</textField>
+							</cellContents>
+						</crosstabRowHeader>
+						<crosstabTotalRowHeader>
+							<cellContents mode="Opaque" style="Crosstab_CG">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</cellContents>
+						</crosstabTotalRowHeader>
+					</rowGroup>
+					<columnGroup name="col_free_text1" height="20" totalPosition="End" headerPosition="Stretch">
+						<bucket order="None" class="java.lang.Object">
+							<bucketExpression><![CDATA["จำนวนเงินเอาประกันภัย (บาท)"]]></bucketExpression>
+						</bucket>
+						<crosstabColumnHeader>
+							<cellContents mode="Opaque" style="BG_HEADER">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
+								<box>
+									<pen lineWidth="0.25"/>
+									<topPen lineWidth="0.5" lineColor="#FF0099"/>
+									<leftPen lineWidth="0.5" lineColor="#FF0099"/>
+									<bottomPen lineWidth="0.0" lineColor="#FF0099"/>
+									<rightPen lineWidth="0.5" lineColor="#FF0099"/>
+								</box>
+								<textField textAdjust="ScaleFont">
+									<reportElement x="0" y="0" width="40" height="20" uuid="c3261171-e16b-4ac0-88e8-8b4ca4efb8ef"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="TH SarabunPSK"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{col_free_text1}]]></textFieldExpression>
+								</textField>
+							</cellContents>
+						</crosstabColumnHeader>
+						<crosstabTotalColumnHeader>
+							<cellContents mode="Opaque" style="Crosstab_CG">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</cellContents>
+						</crosstabTotalColumnHeader>
+					</columnGroup>
+					<columnGroup name="plan_benefit" height="41" totalPosition="End">
+						<bucket class="java.lang.String">
+							<bucketExpression><![CDATA[$F{plan_benefit}]]></bucketExpression>
+						</bucket>
+						<crosstabColumnHeader>
+							<cellContents mode="Opaque" style="BG_HEADER">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineColor="#FF0099"/>
+									<leftPen lineColor="#FF0099"/>
+									<bottomPen lineWidth="0.0" lineColor="#FF0099"/>
+									<rightPen lineColor="#FF0099"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="40" height="20" uuid="51da3074-64da-4184-886a-617dd4b84591">
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									</reportElement>
+									<box>
+										<pen lineWidth="0.5"/>
+										<topPen lineWidth="0.0"/>
+										<leftPen lineWidth="0.0" lineColor="#FF0099"/>
+										<bottomPen lineWidth="0.0"/>
+										<rightPen lineWidth="0.0" lineColor="#FF0099"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="TH SarabunPSK" size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{plan_benefit}]]></textFieldExpression>
+								</textField>
+								<textField textAdjust="ScaleFont">
+									<reportElement mode="Opaque" x="0" y="20" width="40" height="20" uuid="e0bf2d8f-7694-4275-8f3b-772d1f2dff7e">
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									</reportElement>
+									<box>
+										<pen lineWidth="0.5"/>
+										<topPen lineColor="#FF0099"/>
+										<leftPen lineColor="#FF0099"/>
+										<bottomPen lineWidth="0.5" lineColor="#FF0099"/>
+										<rightPen lineColor="#FF0099"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="TH SarabunPSK"/>
+									</textElement>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</cellContents>
+						</crosstabColumnHeader>
+						<crosstabTotalColumnHeader>
+							<cellContents mode="Opaque" style="Crosstab_CT">
+								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</cellContents>
+						</crosstabTotalColumnHeader>
+					</columnGroup>
+					<measure name="plan_benefit_amount" class="java.lang.String">
+						<measureExpression><![CDATA[$F{plan_benefit_amount}]]></measureExpression>
+					</measure>
+					<crosstabCell width="40" height="20">
+						<cellContents mode="Opaque" style="Crosstab_CD">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<leftPen lineColor="#FF0099"/>
+								<rightPen lineColor="#FF0099"/>
+							</box>
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="40" height="20" uuid="089a65c6-ee1c-4755-86db-0b10e3b5fe6f"/>
+								<textElement textAlignment="Center">
+									<font fontName="TH SarabunPSK" size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{plan_benefit_amount}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="0" height="20" columnTotalGroup="plan_benefit">
+						<cellContents mode="Opaque" style="Crosstab_CT"/>
+					</crosstabCell>
+					<crosstabCell width="40" height="5" rowTotalGroup="seq_no_plan_code">
+						<cellContents mode="Opaque" style="Crosstab_CD">
+							<box>
+								<bottomPen lineWidth="0.0" lineColor="#FF0099"/>
+							</box>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="0" height="5" rowTotalGroup="seq_no_plan_code" columnTotalGroup="plan_benefit">
+						<cellContents mode="Opaque" style="Crosstab_CT"/>
+					</crosstabCell>
+					<crosstabCell width="40" height="1" rowTotalGroup="plan_desc">
+						<cellContents mode="Opaque" style="Crosstab_CG">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineColor="#FF0099"/>
+							</box>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="0" height="1" rowTotalGroup="plan_desc" columnTotalGroup="plan_benefit">
+						<cellContents mode="Opaque" style="Crosstab_CT"/>
+					</crosstabCell>
+					<crosstabCell width="40" height="0" rowTotalGroup="seq_no_benefit_condition">
+						<cellContents mode="Opaque" style="Crosstab_CG">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="0" height="0" rowTotalGroup="seq_no_benefit_condition" columnTotalGroup="plan_benefit">
+						<cellContents mode="Opaque" style="Crosstab_CT"/>
+					</crosstabCell>
+					<crosstabCell width="40" height="0" rowTotalGroup="benefit_condition_desc">
+						<cellContents mode="Opaque" style="Crosstab_CG"/>
+					</crosstabCell>
+					<crosstabCell width="0" height="0" rowTotalGroup="benefit_condition_desc" columnTotalGroup="plan_benefit">
+						<cellContents mode="Opaque" style="Crosstab_CT">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="0" height="20" columnTotalGroup="col_free_text1">
+						<cellContents mode="Opaque" style="Crosstab_CG"/>
+					</crosstabCell>
+					<crosstabCell width="0" height="5" rowTotalGroup="seq_no_plan_code" columnTotalGroup="col_free_text1">
+						<cellContents mode="Opaque" style="Crosstab_CT"/>
+					</crosstabCell>
+					<crosstabCell width="0" height="1" rowTotalGroup="plan_desc" columnTotalGroup="col_free_text1">
+						<cellContents mode="Opaque" style="Crosstab_CG"/>
+					</crosstabCell>
+					<crosstabCell width="0" height="0" rowTotalGroup="seq_no_benefit_condition" columnTotalGroup="col_free_text1">
+						<cellContents mode="Opaque" style="Crosstab_CG"/>
+					</crosstabCell>
+					<crosstabCell width="0" height="0" rowTotalGroup="benefit_condition_desc" columnTotalGroup="col_free_text1">
+						<cellContents mode="Opaque" style="Crosstab_CG"/>
+					</crosstabCell>
+				</crosstab>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
